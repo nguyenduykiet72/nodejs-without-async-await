@@ -1,0 +1,36 @@
+{
+  "type": "commonjs",
+  "dependencies": {
+    "@types/node": "^20.11.15",
+    "body-parser": "^1.20.2",
+    "chalk": "^5.3.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.3",
+    "pug": "^3.0.2",
+    "socket.io": "^4.7.4"
+  },
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "Nguyen Duy Kiet",
+  "license": "ISC",
+  "description": "learning process",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenduykiet72/nodeJs_learning.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nguyenduykiet72/nodeJs_learning/issues"
+  },
+  "homepage": "https://github.com/nguyenduykiet72/nodeJs_learning#readme"
+}
