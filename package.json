@@ -32,5 +32,9 @@
   "bugs": {
     "url": "https://github.com/nguyenduykiet72/nodeJs_learning/issues"
   },
-  "homepage": "https://github.com/nguyenduykiet72/nodeJs_learning#readme"
+  "homepage": "https://github.com/nguyenduykiet72/nodeJs_learning#readme",
+  "devDependencies": {
+    "compression": "^1.7.4",
+    "helmet": "^7.1.0"
+  }
 }
