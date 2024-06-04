@@ -10,3 +10,8 @@
 //     console.log("Server has been closed");
 //   });
 // });
+
+// require('dotenv').config();
+// const os = require('node:os');
+
+// console.log(os.cpus().length);
