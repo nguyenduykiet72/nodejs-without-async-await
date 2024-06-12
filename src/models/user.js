@@ -1,16 +1,24 @@
-"use strict";
-const Sequelize = require("sequelize").Sequelize;
-const sequelize = require("../util/database");
+// "use strict";
+// const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
 
-const User = sequelize.define("user", {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true,
-  },
-  name: Sequelize.STRING,
-  email: Sequelize.STRING,
-});
+// const productSchema = new Schema({
+//   title: {
+//     type: String,
+//     required: true,
+//   },
+//   price: {
+//     type: Number,
+//     required: true,
+//   },
+//   description: {
+//     type: String,
+//     required: true,
+//   },
+//   imgURL: {
+//     type: String,
+//     required: true,
+//   },
+// });
 
-module.exports = User;
+//  module.exports = mongoose.model("Product", productSchema);

@@ -1,18 +1,15 @@
 "use strict";
+require('dotenv').config()
 const mongoose = require("mongoose");
-require("dotenv").config();
-const connectionString = process.env.MONGODB_URI;
+const connectionString = `mongodb://localhost:27017/nodejsMongo`;
 console.log("ConnectionString:", connectionString);
 
 const configDatabase = () => {
-  mongoose
-    .connect(process.env.MONGODB_URI)
-    .then(() => {
-      console.log("Connected to Mongo Successfully");
-    })
-    .catch((error) => {
-      console.log("Error connecting to Mongodb", error);
-    });
-};
+  mongoose.connect(process.env.MONGODB).then(() => {
+    console.log("Connected to MongoDB successfully");
+  }).then(() =>{
+    console.log("This is the connection to MongoDB:",process.env.MONGODB);
+  }).catch(err => console.log(err))
+}
 
 module.exports = configDatabase;

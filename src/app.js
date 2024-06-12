@@ -4,7 +4,7 @@ const express = require("express");
 const compression = require("compression");
 const app = express();
 const errorController = require("./controllers/error");
-require('dotenv').config();
+require('dotenv').config()
 
 
 
@@ -21,18 +21,18 @@ app.set("views", path.join(__dirname, "views"));
 
 
 
-app.use((req, res, next) => {
-  // {
-  //   User.findByPk(1)
-  //     .then((user) => {
-  //       req.user = user;
-  //       next();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-});
+// app.use((req, res, next) => {
+//   // {
+//   //   User.findByPk(1)
+//   //     .then((user) => {
+//   //       req.user = user;
+//   //       next();
+//   //     })
+//   //     .catch((err) => {
+//   //       console.log(err);
+//   //     });
+//   // }
+// });
 
 
 const databaseMongo = require('./util/database')
@@ -42,4 +42,6 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
-app.listen(3000);
+app.listen(8080);
+
+// module.exports = app;
