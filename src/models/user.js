@@ -1,24 +1,29 @@
-// "use strict";
-// const mongoose = require("mongoose");
-// const Schema = mongoose.Schema;
+"use strict";
 
-// const productSchema = new Schema({
-//   title: {
-//     type: String,
-//     required: true,
-//   },
-//   price: {
-//     type: Number,
-//     required: true,
-//   },
-//   description: {
-//     type: String,
-//     required: true,
-//   },
-//   imgURL: {
-//     type: String,
-//     required: true,
-//   },
-// });
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-//  module.exports = mongoose.model("Product", productSchema);
+const userSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  cart: {
+    items: [
+      {
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: { type: Number, required: true },
+      },
+    ],
+  },
+});
+
+module.exports = mongoose.model("User", userSchema);
