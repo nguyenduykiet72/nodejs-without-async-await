@@ -36,8 +36,6 @@ exports.getEditProduct = (req, res, next) => {
     return res.redirect("/");
   }
   const prodId = req.params.productId;
-  // req.user
-  //   .getProducts({ where: { id: prodId } })
   Product.find()
     .then((products) => {
       const product = products[0];
@@ -89,10 +87,11 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.findById(prodId)
-    .then((product) => {
-      return product.destroy();
-    })
+  // Product.findById(prodId)
+  Product.findByIdAndDelete(prodId)
+    // .then((product) => {
+    //   return product.destroy();
+    // })
     .then((result) => {
       console.log("DESTROYED PRODUCT");
       res.redirect("/admin/products");
