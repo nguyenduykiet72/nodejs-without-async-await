@@ -21,20 +21,6 @@ app.set("views", path.join(__dirname, "views"));
 
 
 
-// app.use((req, res, next) => {
-//   // {
-//   //   User.findByPk(1)
-//   //     .then((user) => {
-//   //       req.user = user;
-//   //       next();
-//   //     })
-//   //     .catch((err) => {
-//   //       console.log(err);
-//   //     });
-//   // }
-// });
-
-
 const databaseMongo = require('./util/database')
 databaseMongo()
 

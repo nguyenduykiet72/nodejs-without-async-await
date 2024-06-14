@@ -8,7 +8,6 @@ const configDatabase = () => {
   mongoose.connect(process.env.MONGODB).then(() => {
     console.log("Connected to MongoDB successfully");
   }).then(() =>{
-    console.log("This is the connection to MongoDB:",process.env.MONGODB);
   }).catch(err => console.log(err))
 }
 
