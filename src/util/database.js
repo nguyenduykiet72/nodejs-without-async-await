@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const User = require("../models/user");
 const user = require("../models/user");
-const connectionString = `mongodb://localhost:27017/nodejsMongo`;
+const connectionString = process.env.MONGODB;
 console.log("ConnectionString:", connectionString);
 
 const configDatabase = () => {
