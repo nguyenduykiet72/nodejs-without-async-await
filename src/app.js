@@ -35,7 +35,6 @@ app.use(
   })
 );
 app.use((req, res, next) => {
-  // req.session.user = new User().init(req.session.user);
   if(!req.session.user){
     return next();
   }

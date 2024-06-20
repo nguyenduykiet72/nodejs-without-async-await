@@ -12,20 +12,6 @@ const configDatabase = () => {
     .then(() => {
       console.log("Connected to MongoDB successfully");
     })
-    .then(() => {
-      User.findOne().then((user) => {
-        if (!user) {
-          const user = new User({
-            name: "Osborn",
-            email: "Osborn@gmail.com",
-            cart: {
-              items: [],
-            },
-          });
-          user.save();
-        }
-      });
-    })
     .catch((err) => console.log(err));
 };
 
