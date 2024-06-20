@@ -19,7 +19,7 @@ exports.postAddProduct = (req, res, next) => {
     price: price,
     description: description,
     imageUrl: imageUrl,
-    userId: req.session.user
+    userId: req.user 
   });
   product
     .save()
@@ -37,7 +37,7 @@ exports.getEditProduct = (req, res, next) => {
   if (!editMode) {
     return res.redirect("/");
   }
-  const prodId = req.params.productId;
+  // const prodId = req.params.productId;
   Product.find()
     .then((products) => {
       const product = products[0];
