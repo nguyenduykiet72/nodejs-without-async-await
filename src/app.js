@@ -48,7 +48,7 @@ app.use((req, res, next) => {
     });
 });
 
-const databaseMongo = require("./util/database");
+const databaseMongo = require("./utils/database");
 databaseMongo();
 
 app.use("/admin", adminRoutes);
