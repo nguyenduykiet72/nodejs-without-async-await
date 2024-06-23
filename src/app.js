@@ -4,6 +4,12 @@ const express = require("express");
 const compression = require("compression");
 const session = require("express-session");
 const mongoStore = require("connect-mongodb-session")(session);
+const { csrfSync } = require("csrf-sync");
+const flash = require("connect-flash");
+
+const { csrfSynchronisedProtection } = csrfSync({
+  getTokenFromRequest: (req) => req.body["CSRFToken"],
+});
 const app = express();
 const errorController = require("./controllers/error");
 const User = require("./models/user");
@@ -34,8 +40,17 @@ app.use(
     cookie: User.findById(`666c5374b061cb2d400269a0`),
   })
 );
+
+
+app.use(csrfSynchronisedProtection);
+app.use(flash());
 app.use((req, res, next) => {
-  if(!req.session.user){
+  res.locals.isAuthenticated = req.session.isAuthenticated;
+  res.locals.csrfToken = req.csrfToken(true);
+  next();
+});
+app.use((req, res, next) => {
+  if (!req.session.user) {
     return next();
   }
   User.findById(req.session.user._id)
@@ -48,7 +63,7 @@ app.use((req, res, next) => {
     });
 });
 
-const databaseMongo = require("./utils/database");
+const databaseMongo = require("./databases/dbs.mongo");
 databaseMongo();
 
 app.use("/admin", adminRoutes);
@@ -56,6 +71,6 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 app.use(errorController.get404);
-app.listen(8080);
+// app.listen(8080);
 
-// module.exports = app;
+module.exports = app;
