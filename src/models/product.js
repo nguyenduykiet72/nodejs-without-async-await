@@ -1,29 +1,29 @@
-const db = require("../util/database");
-const Cart = require("./cart");
+"use strict";
+const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
 
-module.exports = class Product {
-  constructor(id, title, imageUrl, description, price) {
-    this.id = id;
-    this.title = title;
-    this.imageUrl = imageUrl;
-    this.description = description;
-    this.price = price;
+const productSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  userId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   }
+});
 
-  save() {
-    return db.execute(
-      "INSERT INTO products (title,price,description, imageUrl) VALUES (?, ?, ?,?)",
-      [this.title,this.price,this.description,this.imageUrl]
-    );
-  }
-
-  static deleteById(id) {}
-
-  static fetchAll() {
-    return db.execute("SELECT * FROM products");
-  }
-
-  static findById(id) {
-    return db.execute('SELECT * FROM products WHERE products.id = ?', [id]);
-  }
-};
+module.exports = mongoose.model("Product", productSchema);
