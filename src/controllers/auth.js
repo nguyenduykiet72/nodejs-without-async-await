@@ -1,8 +1,8 @@
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
+const { validationResult } = require("express-validator");
 const User = require("../models/user");
-const user = require("../models/user");
 
 var transport = nodemailer.createTransport({
   host: "sandbox.smtp.mailtrap.io",
@@ -22,7 +22,7 @@ exports.getLogin = (req, res, next) => {
   }
   res.render("auth/login", {
     path: "/login",
-    pageTitle: "Your Orders",
+    pageTitle: "Login",
     errorMessage: message,
   });
 };
@@ -66,6 +66,7 @@ exports.postLogin = (req, res, next) => {
         })
         .catch((err) => {
           console.log(err);
+          res.redirect("/login");
         });
     })
     .catch((err) => {
@@ -77,6 +78,15 @@ exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const confirmPassword = req.body.confirmPassword;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+    return res.status(422).render("auth/signup", {
+      path: "/signup",
+    pageTitle: "Signup",
+      errorMessage: errors.array()[0].msg,
+    });
+  }
   User.findOne({ email: email })
     .then((userDoc) => {
       if (userDoc) {
@@ -98,9 +108,9 @@ exports.postSignup = (req, res, next) => {
           return transport.sendMail({
             from: "practiceNodejs@gmail.com",
             to: email,
-            subject: "Signup successfull",
-            text: "Signup successfull",
-            html: "<h1>Signup successfull</h1>",
+            subject: "Signup successfully",
+            text: "Signup successfully",
+            html: "<h1>Signup successfully</h1>",
           });
         })
         .catch((error) => {
@@ -156,7 +166,6 @@ exports.postReset = (req, res, next) => {
           from: "practiceNodejs@gmail.com",
           to: req.body.email,
           subject: "Password reset",
-          // text: "Password reset",
           html: `<p>You requested a password reset</p>
           <p>Click this <a href="http://localhost:8080/reset/${token}">Link</a> </p>
         `,
@@ -210,10 +219,11 @@ exports.postNewPassword = (req, res, next) => {
       resetUser.resetToken = undefined;
       resetUser.resetTokenExpiration = undefined;
       return resetUser.save();
-    }).
-    then(() => {
+    })
+    .then(() => {
       res.redirect("/login");
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err);
     });
 };
